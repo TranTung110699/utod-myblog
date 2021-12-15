@@ -1,0 +1,227 @@
+<app-preloader [timeLoad]="2000" *ngIf="preload"></app-preloader>
+<div *ngIf="!preload" class="site-wrapper">
+  <div class="main-overlay"></div>
+  <!-- section main content -->
+  <section class="main-content mt-3">
+    <div class="container-xl">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a class="active" style="cursor: pointer" [routerLink]="['/']"
+              >Home</a
+            >
+          </li>
+          <li class="breadcrumb-item" *ngFor="let tag of article?.tagList">
+            <a class="active">{{ tag | titlecase }}</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ article?.title }}
+          </li>
+        </ol>
+      </nav>
+
+      <div class="row gy-4">
+        <div class="col-md-12 col-lg-8">
+          <!-- post single -->
+          <div class="post post-single">
+            <!-- post header -->
+            <div class="post-header">
+              <h1 class="title mt-0 mb-3">{{ article?.title }}</h1>
+              <ul class="meta list-inline mb-0">
+                <li class="list-inline-item">
+                  <a routerLink="/profile/{{ article?.author?.username }}"
+                    ><img
+                      style="width: 50px; height: 50px; border-radius: 25px"
+                      [src]="article?.author?.image"
+                      class="author"
+                      alt="author"
+                    />
+                    {{ article?.author?.username }}</a
+                  >
+                </li>
+                <li class="list-inline-item">
+                  {{ article?.createdAt | date: "longDate" }}
+                </li>
+              </ul>
+            </div>
+
+            <div
+              *ngIf="
+                isLoggedIn && currentUser === article?.author?.username;
+                else other
+              "
+              class="actions"
+            >
+              <a
+                style="cursor: pointer"
+                (click)="editArticle(article.slug)"
+                class="category-badge me-2"
+                ><i class="fas fa-edit"></i> Edit Post</a
+              >
+              <a
+                style="cursor: pointer"
+                appDebounceClick
+                (debounceClick)="deleteArticle(article.slug)"
+                class="category-badge"
+                ><i class="fas fa-trash-alt"></i> Delete</a
+              >
+            </div>
+            <br />
+
+            <ng-template #other>
+              <div class="actions">
+                <button
+                  style="
+                    margin-right: 20px;
+                    font-size: 15px;
+                    border-radius: 20px;
+                  "
+                  *ngIf="!article?.favorited"
+                  class="grayBack"
+                  appDebounceClick
+                  (debounceClick)="favourite()"
+                >
+                  <i class="fas fa-heart"></i> Favourite
+                  {{ article?.favoritesCount }}
+                </button>
+
+                <button
+                  style="margin-right: 20px; font-size: 15px"
+                  *ngIf="article?.favorited"
+                  class="greenBack"
+                  appDebounceClick
+                  (debounceClick)="unfavorite()"
+                >
+                  <i class="fas fa-heart-broken"></i> Unfavourite
+                  {{ article?.favoritesCount }}
+                </button>
+                <button
+                  style="font-size: 15px; border-radius: 20px"
+                  *ngIf="!article?.author?.following"
+                  class="grayBack"
+                  appDebounceClick
+                  (debounceClick)="follow()"
+                >
+                  <i class="fas fa-user-plus"></i> Follow
+                </button>
+                <button
+                  style="font-size: 15px; border-radius: 20px"
+                  *ngIf="article?.author?.following"
+                  class="greenBack"
+                  appDebounceClick
+                  (debounceClick)="unfollow()"
+                >
+                  <i class="fas fa-user-minus"></i> Unfollow
+                </button>
+              </div>
+              <br />
+              <br />
+            </ng-template>
+            <!-- post content -->
+            <div class="post-content clearfix">
+              <p
+                style="font-size: 20px"
+                [innerHtml]="(article?.body ? article.body : '') | breakline"
+              ></p>
+              <!-- post bottom section -->
+              <div class="post-bottom">
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-6 col-12 text-center text-md-start">
+                    <!-- tags -->
+                    <a
+                      style="color: grey"
+                      class="active"
+                      class="tag me-2"
+                      *ngFor="let tag of article?.tagList"
+                      ># {{ tag | titlecase }}</a
+                    >
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <!-- social icons -->
+                    <ul
+                      class="
+                        social-icons
+                        list-unstyled list-inline
+                        mb-0
+                        float-md-end
+                      "
+                    >
+                      <li class="list-inline-item">
+                        <a class="active"><i class="fab fa-facebook-f"></i></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="active"><i class="fab fa-twitter"></i></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="active"><i class="fab fa-linkedin-in"></i></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="active"><i class="fab fa-pinterest"></i></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="active"
+                          ><i class="fab fa-telegram-plane"></i
+                        ></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="active"><i class="far fa-envelope"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="spacer" data-height="50"></div>
+
+            <div class="about-author padding-30 rounded">
+              <div class="thumb">
+                <a routerLink="/profile/{{ article?.author?.username }}">
+                  <img style="" [src]="article?.author?.image"
+                /></a>
+              </div>
+              <div class="details">
+                <h4 class="name">
+                  <a routerLink="/profile/{{ article?.author?.username }}">{{
+                    article?.author?.username
+                  }}</a>
+                </h4>
+                <p>{{ article?.description | titlecase }}</p>
+                <!-- social icons -->
+                <ul class="social-icons list-unstyled list-inline mb-0">
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-facebook-f"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-twitter"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-instagram"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-pinterest"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-medium"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="active"><i class="fab fa-youtube"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="spacer" data-height="50"></div>
+            <app-comment [slug]="article?.slug"></app-comment>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <!-- sidebar -->
+          <app-widget-about></app-widget-about>
+          <app-tag-list class="hide"></app-tag-list>
+          <app-newsletter></app-newsletter>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

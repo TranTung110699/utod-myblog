@@ -1,0 +1,12 @@
+<div class="row text-center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+<div *ngIf="isLoading" style="padding-top: 100%"></div>
+<app-articles-list *ngIf="!isLoading" [listArticles]="list"></app-articles-list>
+
+<app-pagination
+  *ngIf="pageNumbers.length > 1 && !isLoading"
+  [totalPages]="pageNumbers"
+  [currentPage]="currentPage"
+>
+</app-pagination>

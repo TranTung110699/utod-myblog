@@ -1,0 +1,43 @@
+<div class="container-md">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <div class="col-12 mb-5 bg-white rounded-top tab-head">
+        <ul class="nav nav-tabs outline" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-toggle="tab"
+              role="tab"
+              [routerLink]="['/profile', authorName]"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLinkActive="active"
+              >{{
+                username === authorName ? "My" : (authorName || "Author") + "'s"
+              }}
+              Posts</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-toggle="tab"
+              role="tab"
+              [routerLink]="['/profile', authorName, 'favorite']"
+              routerLinkActive="active"
+              >Favorited Posts</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-12 col-lg-4">
+      <app-widget-about></app-widget-about>
+      <app-newsletter></app-newsletter>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<nav class="mb-5">
+  <ul class="pagination justify-content-center">
+    <li
+      *ngFor="let page of totalPages"
+      class="page-item {{ currentPage === page ? 'active' : '' }}"
+    >
+      <span class="page-link" (click)="changePage(page)">{{ page }}</span>
+    </li>
+  </ul>
+</nav>

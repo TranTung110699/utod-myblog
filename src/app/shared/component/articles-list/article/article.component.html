@@ -1,0 +1,98 @@
+<div>
+  <div>
+    <div class="post post-grid rounded bordered">
+      <div class="thumb top-rounded">
+        <div class="tag-list">
+          <app-article-tag
+            [tag]="tag"
+            [index]="i"
+            *ngFor="let tag of tagLists; let i = index"
+          ></app-article-tag>
+        </div>
+        <a>
+          <div class="inner">
+            <img
+              [routerLink]="['/article', article.slug]"
+              src="{{ img }}"
+              alt="post-title"
+            />
+          </div>
+        </a>
+      </div>
+      <div class="details">
+        <ul class="meta list-inline mb-0">
+          <li class="list-inline-item">
+            <a routerLink="/profile/{{ article.author.username }}"
+              ><img
+                style="width: 50px; height: 50px; border-radius: 50%"
+                src="{{ article.author.image }}"
+                class="author"
+                alt="author"
+              />{{ article.author.username }}</a
+            >
+          </li>
+          <li class="list-inline-item">{{ article.createdAt | date }}</li>
+        </ul>
+        <h5 class="post-title mb-3 mt-3">
+          <a [routerLink]="['/article', article.slug]">{{
+            article.title | titlecase | truncate: 23
+          }}</a>
+        </h5>
+        <p class="excerpt mb-0" style="height: 48px">
+          {{ article.body | truncate: 60 }}
+        </p>
+      </div>
+      <div class="post-bottom clearfix d-flex align-items-center">
+        <div class="social-share me-auto">
+          <div class="float-start">
+            <span
+              *ngIf="favorited == false"
+              style="margin-right: 8px; display: flex; align-items: center"
+            >
+              <div
+                (click)="onLike(article.slug)"
+                class="{{
+                  article.favorited
+                    ? 'none-heart'
+                    : isLogin
+                    ? 'heart'
+                    : 'none-login-heart'
+                }}"
+              ></div>
+              <div style="margin-left: -12px">{{ article.favoritesCount }}</div>
+              <div class="my-btn-particles"></div>
+            </span>
+
+            <span
+              *ngIf="favorited == true"
+              style="margin-right: 8px; display: flex; align-items: center"
+            >
+              <div
+                class="{{ article.favorited ? 'none-heart' : 'heart' }}"
+                (click)="onUnLike(article.slug)"
+              ></div>
+              <div style="margin-left: -12px">{{ article.favoritesCount }}</div>
+            </span>
+            <span style="margin-right: 8px">
+              <i class="far fa-eye" style="margin-right: 5px"></i
+              >{{ article.comments.length * 2 }}
+            </span>
+            <span>
+              <i
+                [routerLink]="['/article', article.slug]"
+                class="fas fa-comment"
+                style="margin-right: 5px"
+              ></i
+              >{{ article.comments.length }}
+            </span>
+          </div>
+        </div>
+        <div class="more-button float-end" style="margin-right: 8px">
+          <a [routerLink]="['/article', article.slug]"
+            ><i class="fas fa-ellipsis-h"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

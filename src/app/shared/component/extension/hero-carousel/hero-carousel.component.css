@@ -1,0 +1,45 @@
+.carousel-btn {
+  width: 50px;
+  height: 50px;
+  line-height: 65px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 0;
+  border-radius: 25px;
+}
+
+.carousel-indicators [data-bs-target] {
+  /* background-color: #fe4f70 !important; */
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 62% !important;
+}
+
+@media (max-width: 767px) {
+  section {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+  .featured-post-xl .details {
+    left: 35% !important;
+  }
+}
+
+@media (min-width: 851px) and (max-width: 905px) {
+  .featured-post-xl .details {
+    left: 40% !important;
+  }
+}
+
+@media (min-width: 906px) and (max-width: 1074px) {
+  .featured-post-xl .details {
+    left: 46% !important;
+  }
+}
+
+@media (min-width: 1075px) {
+  .featured-post-xl .details {
+    left: 49% !important;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="row text-center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+
+<h5 *ngIf="!isLoading && emptyPage">You have not liked any posts yet...</h5>
+<app-articles-list
+  *ngIf="!isLoading && !emptyPage"
+  [listArticles]="articles"
+></app-articles-list>
+
+<app-pagination
+  *ngIf="totalPages.length > 1 && !isLoading"
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+></app-pagination>

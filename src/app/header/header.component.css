@@ -1,0 +1,7 @@
+.active {
+  color: #fff !important;
+  border-radius: 25px;
+  /* background: #fe4f70; */
+  /* background: -webkit-linear-gradient(left, #fe4f70 0%, #ffa387 100%); */
+  background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+}

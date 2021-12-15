@@ -1,0 +1,26 @@
+<app-preloader></app-preloader>
+<div *ngIf="isLoading; else form" class="row" style="justify-content: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<ng-template #form>
+  <section class="main-content" style="margin-bottom: 100px">
+    <div class="container-xl">
+      <!-- section header -->
+      <div class="section-header row form-setting" style="padding-bottom: 10px">
+        <div class="col-6">
+          <h2 class="section-title">Edit Post</h2>
+          <img
+            src="https://themeger.shop/html/katen/html/images/wave.svg"
+            class="wave"
+            alt="wave"
+          />
+        </div>
+        <div class="col-6"></div>
+      </div>
+      <app-editor
+        (change)="changesInput = $event"
+        [article]="article"
+      ></app-editor>
+    </div>
+  </section>
+</ng-template>

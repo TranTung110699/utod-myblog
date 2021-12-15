@@ -1,0 +1,79 @@
+<app-preloader *ngIf="isLoading"></app-preloader>
+
+<div *ngIf="!isLoading">
+  <div class="my-login" style="margin-top: 50px">
+    <div class="container">
+      <div class="form-container sign-in-container">
+        <!-- onLogin() run when click submit button -->
+        <form #formLogin="ngForm" (submit)="onLogin(formLogin.value)">
+          <h1>Sign in</h1>
+          <span
+            ><a class="link-sign" routerLink="/auth/sign-up"
+              >Don't have an account?</a
+            ></span
+          >
+          <input
+            type="email"
+            placeholder="Email"
+            [class.border-error]="(email?.errors?.['required'] || email?.errors?.['pattern']) && email?.touched"
+            #email="ngModel"
+            name="email"
+            ngModel
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="email?.errors?.['required'] && email?.touched"
+          >
+            Email is required!!!
+          </div>
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="email?.errors?.['pattern'] && email?.touched"
+          >
+            Email is invalid!!!
+          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            [class.border-error]="(password?.errors?.['required'] || password?.errors?.['pattern']) && password?.touched"
+            #password="ngModel"
+            name="password"
+            ngModel
+            required
+            pattern=".{6,}"
+          />
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="password?.errors?.['required'] && password?.touched"
+          >
+            Password is required!!!
+          </div>
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="password?.errors?.['pattern'] && password?.touched"
+          >
+            Password must be at least 6 !!!
+          </div>
+          <button type="submit" [disabled]="formLogin.invalid">Sign in</button>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-right">
+            <h1 class="text-light">Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button class="ghost" id="signUp" routerLink="/auth/sign-up">
+              Sign Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

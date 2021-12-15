@@ -1,0 +1,97 @@
+<app-preloader *ngIf="isLoading"></app-preloader>
+
+<div *ngIf="!isLoading">
+  <div class="my-login" style="margin-top: 50px">
+    <div class="container">
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1 class="text-light">Welcome Back!</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
+            <button class="ghost" id="signIn" routerLink="/auth/login">
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-container sign-up-container">
+        <!-- onSignup() run when click submit button -->
+        <form #formSignup="ngForm" (submit)="onSignup(formSignup.value)">
+          <h1>Sign up</h1>
+          <span
+            ><a class="link-sign" routerLink="/auth/login"
+              >Have an account?</a
+            ></span
+          >
+          <input
+            type="text"
+            placeholder="Your Name"
+            [class.border-error]="username?.errors?.['required'] && username?.touched"
+            #username="ngModel"
+            name="username"
+            ngModel
+            required
+          />
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="username?.errors?.['required'] && username?.touched"
+          >
+            Username is required!!!
+          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            [class.border-error]="(email?.errors?.['required'] || email?.errors?.['pattern']) && email?.touched"
+            #email="ngModel"
+            name="email"
+            ngModel
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="email?.errors?.['required'] && email?.touched"
+          >
+            Email is required!!!
+          </div>
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="email?.errors?.['pattern'] && email?.touched"
+          >
+            Email is invalid!!!
+          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            [class.border-error]="(password?.errors?.['required'] || password?.errors?.['pattern']) && password?.touched"
+            #password="ngModel"
+            name="password"
+            ngModel
+            required
+            pattern=".{6,}"
+          />
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="password?.errors?.['required'] && password?.touched"
+          >
+            Password is required!!!
+          </div>
+          <div
+            [ngClass]="'alert-sign-up alert-danger'"
+            role="alert"
+            *ngIf="password?.errors?.['pattern'] && password?.touched"
+          >
+            Password must be at least 6 !!!
+          </div>
+          <button type="submit" [disabled]="formSignup.invalid">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

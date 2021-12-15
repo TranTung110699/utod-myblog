@@ -1,0 +1,126 @@
+<!-- <div *ngIf="errors.length !== 0" class="errorContainer">
+  <h5>Errors</h5>
+  <ul>
+    <li *ngFor="let error of errors">
+      {{ error }}
+    </li>
+  </ul>
+</div> -->
+<app-loading-post *ngIf="isLoading"></app-loading-post>
+<div class="row form-setting">
+  <!-- Contact Form -->
+  <form id="contact-form" class="contact-form" [formGroup]="articleEditorForm">
+    <div class="messages"></div>
+
+    <div class="row">
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Post Title</label>
+          <input
+            class="form-control"
+            [class.border-error]="form?.['title']?.errors?.['required'] && form?.['title']?.touched"
+            type="text"
+            formControlName="title"
+            placeholder="Enter Post Title ..."
+          />
+          <div
+            *ngIf="form?.['title']?.invalid && (form?.['title']?.dirty || form?.['title']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['title']?.errors?.['required']">
+              Post Title is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Post Description</label>
+          <input
+            class="form-control"
+            [class.border-error]="form?.['description']?.errors?.['required'] && form?.['description']?.touched"
+            type="text"
+            formControlName="description"
+            placeholder="What's the post about ..."
+          />
+          <div
+            *ngIf="form?.['description']?.invalid && (form?.['description']?.dirty || form?.['description']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['description']?.errors?.['required']">
+              Article Description is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Post Content</label>
+          <textarea
+            class="form-control"
+            [class.border-error]="form?.['content']?.errors?.['required'] && form?.['content']?.touched"
+            type="text"
+            formControlName="content"
+            rows="8"
+            placeholder="Post's Content..."
+          ></textarea>
+          <div
+            *ngIf="form?.['content']?.invalid && (form?.['content']?.dirty || form?.['content']?.touched)"
+            [ngClass]="'alert alert-danger'"
+          >
+            <div *ngIf="form?.['content']?.errors?.['required']">
+              Post Content is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column col-md-12">
+        <div class="form-group">
+          <label>Post Tags</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="tags"
+            placeholder="Insert tags and press 'Enter' to confirm"
+            (keyup.enter)="enterTags()"
+            [(ngModel)]="testTags"
+          />
+        </div>
+      </div>
+      <div class="d-flex column col-md-12">
+        <div class="form-group">
+          <span
+            class="editTags"
+            style="margin-right: 10px"
+            *ngFor="let item of listTags; let i = index"
+            ><a class="tag" style="cursor: pointer"
+              ><i class="ion-close-round" (click)="delTags(item)"></i
+              >{{ item }}</a
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="btn btn-default pull-xs-right"
+      *ngIf="!editFlag"
+      type="button"
+      (click)="handleForm(articleEditorForm.value)"
+      [disabled]="!articleEditorForm.valid"
+    >
+      Publish Post
+    </button>
+    <button
+      class="btn btn-default pull-xs-right"
+      *ngIf="editFlag"
+      type="button"
+      (click)="handleForm(articleEditorForm.value)"
+      [disabled]="!articleEditorForm.valid"
+    >
+      Edit Post
+    </button>
+  </form>
+</div>

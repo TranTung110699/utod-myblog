@@ -1,0 +1,103 @@
+.float-start span i {
+  color: #203656;
+}
+
+.float-start {
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+
+.my-btn-particles {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 50%;
+  color: #eee;
+  font-family: monospace;
+  z-index: 5;
+  margin-top: -120px;
+  margin-left: -80px;
+  /* 	filter: url(#gooeyness); */
+}
+
+.heart {
+  background: url("https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png");
+  width: 50px;
+  height: 50px;
+  background-size: 2900%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: -3px;
+  margin-left: -20px;
+}
+
+.none-heart {
+  background: url("https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png");
+  background-position: right;
+  width: 50px;
+  height: 50px;
+  background-size: 2900%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: -3px;
+  margin-left: -20px;
+}
+
+.none-login-heart {
+  background: url("https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png");
+  background-position: left;
+  width: 50px;
+  height: 50px;
+  background-size: 2900%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: -3px;
+  margin-left: -20px;
+}
+
+.animated-heart {
+  animation-name: moveHeart;
+  animation-duration: 3.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: steps(28);
+  animation-fill-mode: forwards;
+}
+
+.animated-none-heart {
+  animation-name: moveNoneHeart;
+  animation-duration: 2.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: steps(28);
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveHeart {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+@keyframes moveNoneHeart {
+  0% {
+    background-position: right;
+  }
+  50% {
+    background-position: left;
+  }
+  100% {
+    background-position: left;
+  }
+}
+.tag-list {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+}

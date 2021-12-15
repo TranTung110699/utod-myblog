@@ -1,0 +1,18 @@
+<app-preloader></app-preloader>
+
+<section class="main-content" style="margin-bottom: 100px">
+  <div class="container-xl">
+    <!-- section header -->
+    <div class="section-header row form-setting" style="padding-bottom: 10px">
+      <div>
+        <h2 class="section-title">Publish New Post</h2>
+        <img
+          src="https://themeger.shop/html/katen/html/images/wave.svg"
+          class="wave"
+          alt="wave"
+        />
+      </div>
+    </div>
+    <app-editor (change)="changesInput = $event"></app-editor>
+  </div>
+</section>

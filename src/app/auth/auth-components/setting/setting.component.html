@@ -1,0 +1,191 @@
+<app-preloader></app-preloader>
+<section class="main-content" style="margin-bottom: 100px">
+  <div class="container-xl">
+    <!-- section header -->
+    <div class="section-header row form-setting" style="padding-bottom: 10px">
+      <div class="col-6">
+        <h2 class="section-title">Update User</h2>
+        <img
+          src="https://themeger.shop/html/katen/html/images/wave.svg"
+          class="wave"
+          alt="wave"
+        />
+      </div>
+      <div class="col-6">
+        <!-- logout() run when click logout button -->
+        <button class="btn btn-md btn-danger float-end" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="row form-setting">
+      <div class="text-center">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </div>
+    <div *ngIf="isLoading" style="padding-top: 100%"></div>
+    <div *ngIf="!isLoading" class="row form-setting">
+      <!-- Update user Form -->
+      <!-- onSubmit() run when click submit button -->
+      <form
+        id="contact-form"
+        class="contact-form"
+        #settingForm="ngForm"
+        (submit)="onSubmit(settingForm.value)"
+      >
+        <div class="messages"></div>
+
+        <div class="row">
+          <div class="column col-md-12">
+            <div class="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                class="form-control"
+                [class.border-error]="username?.errors?.['required'] && username?.touched"
+                placeholder="Your Name"
+                #username="ngModel"
+                name="username"
+                [ngModel]="user?.username"
+                (ngModelChange)="user.username = $event"
+                required
+              />
+              <div
+                [ngClass]="'alert alert-danger'"
+                role="alert"
+                *ngIf="username?.errors?.['required'] && username?.touched"
+              >
+                Username is required!!!
+              </div>
+            </div>
+          </div>
+
+          <div class="column col-md-12">
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                [class.border-error]="(email?.errors?.['required'] || email?.errors?.['pattern']) && email?.touched"
+                placeholder="Your email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                #email="ngModel"
+                name="email"
+                [ngModel]="user?.email"
+                (ngModelChange)="user.email = $event"
+                required
+              />
+              <div
+                [ngClass]="'alert alert-danger'"
+                role="alert"
+                *ngIf="email?.errors?.['required'] && email?.touched"
+              >
+                Email is required!!!
+              </div>
+              <div
+                [ngClass]="'alert alert-danger'"
+                role="alert"
+                *ngIf="email?.errors?.['pattern'] && email?.touched"
+              >
+                Email is invalid!!!
+              </div>
+            </div>
+          </div>
+
+          <div class="column col-md-12">
+            <div class="form-group">
+              <label>Short bio about you</label>
+              <textarea
+                class="form-control"
+                [class.border-error]="bio?.errors?.['required'] && bio?.touched"
+                rows="8"
+                placeholder="Short bio about you"
+                #bio="ngModel"
+                name="bio"
+                [ngModel]="user?.bio"
+                (ngModelChange)="user.bio = $event"
+                required
+              ></textarea>
+              <div
+                [ngClass]="'alert alert-danger'"
+                role="alert"
+                *ngIf="bio?.errors?.['required'] && bio?.touched"
+              >
+                Bio is required!!!
+              </div>
+            </div>
+          </div>
+          <div class="column col-md-12">
+            <div class="form-group">
+              <label>URL of profile picture</label>
+              <input
+                type="text"
+                class="form-control"
+                [class.border-error]="image?.errors?.['required'] && image?.touched"
+                placeholder="URL of profile picture"
+                #image="ngModel"
+                name="image"
+                [ngModel]="user?.image"
+                (ngModelChange)="user.image = $event"
+                required
+              />
+              <div
+                [ngClass]="'alert alert-danger'"
+                role="alert"
+                *ngIf="image?.errors?.['required'] && image?.touched"
+              >
+                Image is required!!!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="settingForm.invalid"
+          class="btn btn-default pull-xs-right"
+        >
+          Update User
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="!isLoading" class="row form-setting">
+      <div class="col-12">
+        <h5 class="text-xs-left" style="margin-top: 20px">Number per page:</h5>
+
+        <div class="form-group input-group">
+          <select class="form-control" [(ngModel)]="resultsPerPage">
+            <option [value]="0" selected>Select number Per Page</option>
+            <option [value]="4">4 Items per Page</option>
+            <option [value]="6">6 Items per Page</option>
+            <option [value]="8">8 Items per Page</option>
+          </select>
+          <!-- onPageChoose() run when choose resultPerPage then click submit button -->
+          <button
+            [disabled]="resultsPerPage === '0'"
+            class="btn btn-default pull-xs-right"
+            (click)="onPageChoose()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Appear when click Update User button -->
+<app-alert
+  [message]="updateUser"
+  *ngIf="updateUser"
+  (yes)="onHandleUpdate()"
+  (close)="onHandleClose()"
+></app-alert>
+<!-- Appear when click Logout button -->
+<app-alert
+  [message]="logoutUser"
+  *ngIf="logoutUser"
+  (yes)="onHandleLogout()"
+  (close)="onHandleClose()"
+></app-alert>

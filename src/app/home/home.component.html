@@ -1,0 +1,96 @@
+<app-preloader></app-preloader>
+<app-hero-carousel></app-hero-carousel>
+
+<div class="home-page mt-5">
+  <div class="container-xl page">
+    <div class="row">
+      <div class="section-header mb-0">
+        <h3 class="section-title">Latest Posts</h3>
+        <img
+          src="https://themeger.shop/html/katen/html/images/wave.svg"
+          class="wave"
+          alt="wave"
+        />
+      </div>
+      <div class="col-lg-8" style="margin-top: 0">
+        <div class="feed-toggle">
+          <ul
+            class="nav nav-tabs outline mb-5"
+            style="
+              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              padding: 1.5rem 0 0 0;
+            "
+            id="myTab"
+            role="tablist"
+          >
+            <li class="nav-item">
+              <a
+                class="nav-link {{ ViewMode == 'feed' ? 'active' : '' }}"
+                (click)="changeFeedMode()"
+                data-toggle="tab"
+                role="tab"
+                >Your Feed</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {{ ViewMode == 'global' ? 'active' : '' }}"
+                data-toggle="tab"
+                role="tab"
+                (click)="changeViewMode()"
+                >Global Feed</a
+              >
+            </li>
+            <li class="nav-item" *ngIf="tagMode == true">
+              <a
+                class="nav-link {{ ViewMode == 'tags' ? 'active' : '' }}"
+                data-toggle="tab"
+                role="tab"
+                >Tags Feed</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <app-feed *ngIf="ViewMode == 'feed'"></app-feed>
+        <app-global *ngIf="ViewMode == 'global'"></app-global>
+        <app-tags *ngIf="ViewMode == 'tags'" [tags]="tagsValue"></app-tags>
+        <!-- <app-test-ui *ngIf="ViewMode == 'global'"></app-test-ui> -->
+      </div>
+      <div class="col-lg-4">
+        <!-- Desciption -->
+        <app-widget-about></app-widget-about>
+        <!-- Tags -->
+        <div class="widget rounded">
+          <div class="widget-header text-center">
+            <h3 class="widget-title">Tags</h3>
+            <img
+              src="https://themeger.shop/html/katen/html/images/wave.svg"
+              class="wave"
+              alt="wave"
+            />
+          </div>
+          <div *ngIf="tags.length" class="widget-content">
+            <a
+              class="tag"
+              style="margin-right: 10px; cursor: pointer"
+              (click)="sendTag(tag)"
+              *ngFor="let tag of tags"
+            >
+              # {{ tag }}
+            </a>
+          </div>
+          <p class="text-center" *ngIf="!tags.length">Nothing tags yet...</p>
+        </div>
+        <!-- Post popular -->
+        <app-popular-posts [mostLike]="mostLikes"></app-popular-posts>
+
+        <!-- Subcribe -->
+        <app-newsletter></app-newsletter>
+      </div>
+    </div>
+  </div>
+</div>

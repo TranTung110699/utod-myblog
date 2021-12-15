@@ -1,0 +1,36 @@
+.greenBack {
+  background: linear-gradient(to right, #fe4f70 0%, #fe4f70 100%);
+  border: none;
+  box-shadow: 0px 0px 2px #fe4f70 inset;
+  color: white;
+  border-radius: 25px;
+}
+
+.grayBack {
+  color: #fe4f70;
+  border: none;
+  font-size: 13px;
+  border-radius: 25px;
+  display: inline-block;
+  padding: 6px 11px;
+  line-height: 1;
+  left: 20px;
+  top: 20px;
+  box-shadow: 0px 0px 2px #fe4f70 inset;
+  z-index: 1;
+  background: #fff;
+  background-size: 200% auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 1200px) {
+  .hide {
+    display: none;
+  }
+}
+
+.no-border {
+  border: none;
+}

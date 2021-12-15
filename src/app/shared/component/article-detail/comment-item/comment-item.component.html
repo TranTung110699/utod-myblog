@@ -1,0 +1,23 @@
+
+
+<div class="comments bordered padding-30 rounded">
+
+    <ul class="comments">
+        <!-- comment item -->
+        <li style="list-style-type: none;" class="comment rounded">
+            <div class="thumb">
+                <img style="width:50px; height:50px; border-radius: 40px" [src]="comment.author.image" alt="" />
+            </div>
+            <div class="details">
+                <h4 class="name"><a href="#">{{comment.author.username}}</a></h4>
+                <span class="date">{{comment.createdAt | date}}</span>
+                <p>{{comment.body}}</p>
+                <button *ngIf="isLoggedIn && comment.author.username === currentUser" (click)="deleteComment()" class="btn btn-default btn-sm"><i class="fas fa-trash"></i></button>
+            </div>
+        </li>
+        <!-- comment item -->
+     
+        <!-- comment item -->
+       
+    </ul>
+</div>

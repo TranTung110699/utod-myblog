@@ -1,0 +1,9 @@
+<div class="row text-center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+
+<h5 *ngIf="!isLoading && emptyPage">You haven't followed anyone yet...</h5>
+<app-articles-list
+  *ngIf="!isLoading && !emptyPage"
+  [listArticles]="list"
+></app-articles-list>

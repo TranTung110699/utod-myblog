@@ -1,0 +1,32 @@
+input {
+  border-radius: 20px;
+  height: 50px;
+}
+
+select {
+  border-radius: 20px;
+  height: 50px;
+}
+
+.form-group label {
+  color: #ff416c;
+}
+
+.form-setting {
+  width: 70%;
+  margin-left: 15%;
+}
+
+@media (max-width: 767px) {
+  .form-setting {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-setting {
+    width: 100%;
+    margin-left: 0%;
+  }
+}

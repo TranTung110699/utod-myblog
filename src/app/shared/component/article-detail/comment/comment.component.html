@@ -1,0 +1,43 @@
+<app-comment-list [comments]="comments"></app-comment-list>
+
+<div class="row text-center">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading" class="comment-form rounded bordered padding-30">
+  <div
+    *ngIf="isLoggedIn; else loggedOutMsg"
+    id="comment-form"
+    class="comment-form"
+  >
+    <div class="messages"></div>
+
+    <div class="row">
+      <div class="column col-md-12">
+        <div class="form-group">
+          <textarea
+            #comment
+            name="InputComment"
+            id="InputComment"
+            class="form-control"
+            rows="4"
+            placeholder="Your comment here..."
+            required="required"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <button (click)="addComment(comment.value)" class="btn btn-default">
+      Post Comment
+    </button>
+  </div>
+</div>
+
+<ng-template #loggedOutMsg>
+  <div>
+    <a [routerLink]="['/auth/login']"> Login </a>
+    or
+    <a [routerLink]="['/auth/sign-up']"> SignUp </a>
+    to post a Comment.
+  </div>
+</ng-template>

@@ -1,0 +1,9 @@
+footer {
+  margin-top: 10rem !important;
+  bottom: 0 !important;
+  width: 100%;
+}
+
+footer .footer-inner {
+  padding: 40px 0;
+}
